@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Unit {{ unit_id }}: {{ unit.title }}{% endblock %}
+
+{% block content %}
+    <article class="unit-detail">
+        <h2>{{ unit.title }}</h2>
+        <p class="unit-hours">({{ unit.hours }})</p>
+
+        <section class="unit-focus">
+            <h3>Main Focus:</h3>
+            <p>{{ unit.focus }}</p>
+        </section>
+
+        <section class="unit-concepts">
+            <h3>Key Concepts:</h3>
+            <dl>
+                {% for concept in unit.concepts %}
+                    <dt>{{ concept }}</dt>
+                    {% if unit.concept_explanations is mapping %}
+                        {% set explanation = unit.concept_explanations.get(concept) %}
+                    {% else %}
+                        {% set explanation = None %}
+                    {% endif %}
+                    {% if explanation %}
+                        <dd>
+                            <details>
+                                <summary>Show Explanation</summary>
+                                <div class="explanation">
+                                    {{ explanation | markdown | safe }}
+                                </div>
+                            </details>
+                        </dd>
+                    {% else %}
+                        <dd><em>(No explanation provided)</em></dd>
+                    {% endif %}
+                {% else %}
+                    <p>No concepts listed for this unit.</p>
+                {% endfor %}
+            </dl>
+        </section>
+
+        <section class="unit-questions">
+            <h3>Revision Questions:</h3>
+            <ul>
+                {% if unit.questions %}
+                    {% for question in unit.questions %}
+                        <li>{{ question }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>No revision questions listed for this unit.</li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <hr>
+        <a href="/" class="back-link">« Back to Unit List</a>
+
+    </article>
+{% endblock %} 
