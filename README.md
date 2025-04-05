@@ -1,4 +1,4 @@
-#E-Commerce (CSC370) Course Revision Tool (B.Sc. CSIT 6th Semester)
+##E-Commerce (CSC370) Course Revision Tool (B.Sc. CSIT 6th Semester)
 
 A web-based application for revising E-commerce course content, built with FastAPI and Jinja2.
 
